@@ -13,11 +13,11 @@ if(UNIX AND NOT APPLE)
     # If Linux, add rt and pthread
     set(rt_LIBRARIES rt)
     set(pthread_LIBRARIES pthread)
-    catkin_package(
-        LIBRARIES ${PROJECT_NAME}
-        INCLUDE_DIRS include
-        DEPENDS rt pthread
-    )
+    # catkin_package(
+    #     LIBRARIES ${PROJECT_NAME}
+    #     INCLUDE_DIRS include
+    #     DEPENDS rt pthread
+    # )
 else()
     # Otherwise normal call
     # catkin_package(
@@ -64,6 +64,10 @@ target_link_libraries(serial_example ${PROJECT_NAME})
 ## Include headers
 include_directories(include)
 
+set(CATKIN_PACKAGE_LIB_DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+set(CATKIN_GLOBAL_INCLUDE_DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+set(CATKIN_GLOBAL_BIN_DESTINATION ${CMAKE_INSTALL_PREFIX}/bin)
+
 ## Install executable
 install(TARGETS ${PROJECT_NAME}
     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
@@ -76,6 +80,6 @@ install(FILES include/serial/serial.h include/serial/v8stdint.h
   DESTINATION ${CATKIN_GLOBAL_INCLUDE_DESTINATION}/serial)
 
 ## Tests
-if(CATKIN_ENABLE_TESTING)
-    add_subdirectory(tests)
-endif()
+# if(CATKIN_ENABLE_TESTING)
+#     add_subdirectory(tests)
+# endif()
